@@ -22,7 +22,7 @@
 
 > **Práctica:** Crear una página para la conversión de divisas a una fecha a partir de las cotizaciones obtenidas de un API.
 
-## Bloque II : Angular
+## Bloque II : [Angular](https://github.com/abanca-ITforce/Angular)
 
 ### II.1 Herramientas
 ### II.2 Páginas y rutas
