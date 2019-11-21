@@ -1,1 +1,29 @@
-<h2 style="color: red;">home works!</h2>
+<p style="color: red;">{{ title }}</p>
+<p>{{ title | uppercase }}</p>
+<p>{{ dueDate }}</p>
+<p>{{ dueDate | date }}</p>
+<p>{{ dueDate | date: "MMMM" }}</p>
+<p>{{ dueDate | date: "MMMM" | uppercase }}</p>
+<button [disabled]="isDisabled" (click)="isGreen = true">Set green!</button>
+<img alt="{{ imageAlt | uppercase }}" />
+<button (click)="clickOnActivate()">Activate</button>
+<p [ngClass]="{ green: isGreen, 'bg-cyan': isCyan }">Hello world</p>
+<input type="button" (click)="myNumber = myNumber + 1" value="Up" />
+<h2>{{ myNumber }}</h2>
+<h3 *ngIf="isOdd(); else even">Odd</h3>
+<!-- <h3 *ngIf="myNumber % 2 == 0">Even</h3> -->
+<ng-template #even>
+  <h3>Even</h3>
+</ng-template>
+<ul>
+  <li *ngFor="let customer of customers">{{ customer }}</li>
+</ul>
+<select
+  #provinciasSelector
+  (change)="provinciaSeleccionada = provinciasSelector.value"
+>
+  <option *ngFor="let provincia of provincias" [value]="provincia.cod">{{
+    provincia.texto
+  }}</option>
+</select>
+<p>Provincia: {{ provinciaSeleccionada }}</p>
