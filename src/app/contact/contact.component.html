@@ -1,1 +1,52 @@
-<p>contact works!</p>
+<form [formGroup]="contactForm">
+  <div>
+    <label> Contact Name: </label>
+    <input type="text" formControlName="contactName" />
+    <span *ngIf="hasErrors('contactName')">
+      <span>*</span>
+      <div *ngIf="isTouched('contactName')">Name is required</div>
+    </span>
+  </div>
+  <div>
+    <label> Email: </label>
+    <input type="email" formControlName="email" />
+    <span *ngIf="hasErrors('email')">
+      <span>*</span>
+      <span *ngIf="isTouched('email')">
+        <div *ngIf="hasError('email', 'required')">Email is required</div>
+        <div *ngIf="hasError('email', 'email')">Email is invalid</div>
+      </span>
+    </span>
+  </div>
+  <div>
+    <label> Subject: </label>
+    <textarea formControlName="subject"></textarea>
+    <span *ngIf="hasErrors('subject')">
+      <span>*</span>
+      <span *ngIf="isTouched('subject')">
+        <div *ngIf="hasError('subject', 'required')">Subject is required</div>
+        <div *ngIf="hasError('subject', 'minlength')">Requires 4 chars</div>
+      </span>
+    </span>
+  </div>
+  <div>
+    <label> Age: </label>
+    <input type="number" formControlName="age" />
+    <span *ngIf="hasErrors('age')">
+      <span>*</span>
+      <span *ngIf="isTouched('age')">
+        <div *ngIf="hasError('age', 'min')">Older then 18</div>
+        <div *ngIf="hasError('age', 'max')">Younger than 99</div>
+      </span>
+    </span>
+  </div>
+  <div>
+    <button
+      type="submit"
+      (click)="saveClick()"
+      [disabled]="contactForm.invalid"
+    >
+      Save
+    </button>
+  </div>
+</form>
