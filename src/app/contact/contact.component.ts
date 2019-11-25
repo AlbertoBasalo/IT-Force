@@ -37,13 +37,14 @@ export class ContactComponent implements OnInit {
 
   myEmail(control: AbstractControl) {
     const value = control.value;
+
     if (typeof value == "string") {
       if (value.includes(".")) {
         console.log(value);
         return null;
       }
     }
-    return { needDot: true };
+    return { needDot: "Email needs a dot." };
   }
 
   ngOnInit() {}

@@ -15,6 +15,9 @@
       <span *ngIf="isTouched('email')">
         <div *ngIf="hasError('email', 'required')">Email is required</div>
         <div *ngIf="hasError('email', 'email')">Email is invalid</div>
+        <div *ngIf="hasError('email', 'needDot')">
+          {{ contactForm.controls["email"].errors.needDot }}
+        </div>
       </span>
     </span>
   </div>
