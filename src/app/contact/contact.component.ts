@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from "@angular/forms";
 
 @Component({
   selector: "app-contact",
@@ -18,13 +23,27 @@ export class ContactComponent implements OnInit {
   constructor(formBuilder: FormBuilder) {
     this.contactForm = formBuilder.group({
       contactName: [this.contact.contactName, Validators.required],
-      email: [this.contact.email, [Validators.required, Validators.email]],
+      email: [
+        this.contact.email,
+        [Validators.required, Validators.email, this.myEmail]
+      ],
       subject: [
         this.contact.subject,
         [Validators.required, Validators.minLength(4)]
       ],
       age: [this.contact.age, [Validators.min(18), Validators.max(99)]]
     });
+  }
+
+  myEmail(control: AbstractControl) {
+    const value = control.value;
+    if (typeof value == "string") {
+      if (value.includes(".")) {
+        console.log(value);
+        return null;
+      }
+    }
+    return { needDot: true };
   }
 
   ngOnInit() {}
