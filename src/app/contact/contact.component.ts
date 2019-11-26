@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormValidatorsService } from "../form-validators.service";
+import { ContactService } from "./contact.service";
 
 @Component({
   selector: "app-contact",
@@ -13,19 +10,18 @@ import {
 })
 export class ContactComponent implements OnInit {
   contactForm: FormGroup;
-  private contact = {
-    contactName: "",
-    email: "",
-    subject: "",
-    age: 1
-  };
+  private contact = this.contactService.getNew();
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(
+    formBuilder: FormBuilder,
+    private contactService: ContactService,
+    private formValidators: FormValidatorsService
+  ) {
     this.contactForm = formBuilder.group({
       contactName: [this.contact.contactName, Validators.required],
       email: [
         this.contact.email,
-        [Validators.required, Validators.email, this.myEmail]
+        [Validators.required, Validators.email, formValidators.myEmail]
       ],
       subject: [
         this.contact.subject,
@@ -35,26 +31,10 @@ export class ContactComponent implements OnInit {
     });
   }
 
-  myEmail(control: AbstractControl) {
-    const value = control.value;
-
-    if (typeof value == "string") {
-      if (value.includes(".")) {
-        console.log(value);
-        return null;
-      }
-    }
-    return { needDot: "Email needs a dot." };
-  }
-
   ngOnInit() {}
 
   saveClick() {
-    console.log(this.contactForm.value);
-    console.log(this.contact);
-    this.contact = this.contactForm.value;
-    this.contact.email = this.contact.email.toUpperCase();
-    console.log(this.contact);
+    this.contactService.save(this.contactForm.value);
   }
 
   hasErrors(controlName: string) {
@@ -66,7 +46,10 @@ export class ContactComponent implements OnInit {
   }
 
   hasError(controlName: string, errorName: string) {
-    const control = this.contactForm.controls[controlName];
-    return control.hasError(errorName);
+    return this.formValidators.hasError(
+      this.contactForm,
+      controlName,
+      errorName
+    );
   }
 }
