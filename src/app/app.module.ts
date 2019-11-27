@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Route, RouterModule } from "@angular/router";
 import { AbancaComponent } from "./abanca/abanca.component";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { LayoutModule } from "./layout/layout.module";
 import { NotFoundComponent } from "./not-found/not-found.component";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Route[] = [
   { path: "", component: HomeComponent },
@@ -27,6 +27,11 @@ const routes: Route[] = [
     path: "customers",
     loadChildren: () =>
       import("./customers/customers.module").then(m => m.CustomersModule)
+  },
+  {
+    path: "counter",
+    loadChildren: () =>
+      import("./counter/counter.module").then(m => m.CounterModule)
   }
 ];
 

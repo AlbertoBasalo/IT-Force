@@ -1,0 +1,6 @@
+<p>counter works!</p>
+<app-display [counter]="state.counter"></app-display>
+<app-actions
+  (up)="onUpClick($event)"
+  (down)="onDownClick($event)"
+></app-actions>
