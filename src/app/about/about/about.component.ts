@@ -15,7 +15,13 @@ export class AboutComponent implements OnInit {
       .map(x => x * 2)
       .map(n => " Num: " + n)
       .map(n => n.length);
-    this.source.sort((a, b) => b - a).forEach(x => console.log(x));
+
+    [...this.source].sort((a, b) => b - a).forEach(x => console.log(x));
+
+    this.source
+      .filter(x => true)
+      .sort((a, b) => b - a)
+      .forEach(x => console.log(x));
 
     this.result = this.source.reduce((acc, item) => acc + item, "Start:");
     this.result = this.source.reduce((acc, item) => acc + item, 0);
