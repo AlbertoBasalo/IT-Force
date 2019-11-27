@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { from, Observable, of } from "rxjs";
+import { map, tap } from "rxjs/operators";
 
 @Component({
   selector: "app-about",
@@ -6,7 +8,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./about.component.css"]
 })
 export class AboutComponent implements OnInit {
-  source = [1, 2, 3, 4, 5, 6, -7, 8, 9, 10];
+  source: number[] = [1, 2, 3, 4, 5, 6, -7, 8, 9, 10];
+  source$: Observable<number[]> = of(this.source);
+  sources$: Observable<number> = from(this.source);
   target = [];
   result: any;
   constructor() {
@@ -32,6 +36,23 @@ export class AboutComponent implements OnInit {
         return item;
       }
     });
+
+    this.source$.subscribe(data => console.warn(data));
+    this.sources$
+      .pipe(
+        map(x => 10 * x),
+        tap(x => console.log("TAP:" + x))
+      )
+      .subscribe({
+        next: data => console.log(data),
+        error: err => console.error(err),
+        complete: () => console.warn("END")
+      });
+    // .subscribe(
+    //   data => console.log(data),
+    //   err => console.error(err),
+    //   () => console.warn("END")
+    // );
   }
 
   ngOnInit() {}
