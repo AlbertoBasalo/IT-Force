@@ -18,8 +18,10 @@ export class AboutComponent implements OnInit {
   clonOrdenado: number[];
   // Observable que trata arrays de números
   source$: Observable<number[]>;
+  receivedSource: number[];
   // Observable que trata números
   sources$: Observable<number>;
+  receivedSources: number;
   // Observable que recibe números para mostrar
   targets$: Observable<number>;
 
@@ -60,7 +62,7 @@ export class AboutComponent implements OnInit {
 
     // necesitamos una fuente productora de eventos
     this.source$ = of(this.source); // en este caso un único evento cuyo contenido es un array
-    this.source$.subscribe(data => console.warn(data)); // y suscribirnos
+    this.source$.subscribe(data => (this.receivedSource = data)); // y suscribirnos
     // la suscripción clásica se hace mediante callbacks
 
     // a partir de un array también se puede generar un evento para cada elemento
@@ -68,11 +70,11 @@ export class AboutComponent implements OnInit {
     // este stream de suceso, se puede canalizar y tratar en la tubería
     this.sources$
       .pipe(
-        map(x => 10 * x), // el operador map ejecuta una función de transformación
+        map(x => 3.1416 * x), // el operador map ejecuta una función de transformación
         tap(x => console.log("TAP:" + x)) // el operador tap ejecuta un efecto secundario
       ) // la tubería es una gran función parámetrica
       .subscribe({
-        next: data => console.log(data),
+        next: data => (this.receivedSources = data),
         error: err => console.error(err),
         complete: () => console.warn("END")
       }); // la moderna suscripción mediante un objeto
@@ -86,7 +88,7 @@ export class AboutComponent implements OnInit {
 
     // por si fuera poco...
     // en Angular también podemos usar el pipe async
-    this.targets$ = this.sources$.pipe(map(x => 3 * x));
+    this.targets$ = this.sources$.pipe(map(x => 3.1416 * x));
   }
 
   ngOnInit() {}
