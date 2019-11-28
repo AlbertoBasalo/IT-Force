@@ -1,3 +1,4 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -32,7 +33,13 @@ const routes: Route[] = [
     path: "counter",
     loadChildren: () =>
       import("./counter/counter.module").then(m => m.CounterModule)
-  }
+  },
+  {
+    path: "exchange",
+    loadChildren: () =>
+      import("./exchange/exchange.module").then(m => m.ExchangeModule)
+  },
+  { path: "**", redirectTo: "not-found" }
 ];
 
 @NgModule({
@@ -45,8 +52,9 @@ const routes: Route[] = [
   imports: [
     BrowserModule,
     LayoutModule,
-    RouterModule.forRoot([...routes, { path: "**", redirectTo: "not-found" }]),
-    BrowserAnimationsModule
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
