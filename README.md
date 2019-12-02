@@ -37,3 +37,5 @@
 ## Bloque III : Proyecto
 
 > **Práctica:** Crear una aplicación con Angular para explorar datos públicos del banco mundial.
+
+- [Classroom](https://classroom.github.com/a/yYxGgLFD)
