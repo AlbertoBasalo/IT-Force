@@ -39,3 +39,21 @@
 > **Práctica:** Crear una aplicación con Angular para explorar datos públicos del banco mundial.
 
 - [Classroom](https://classroom.github.com/a/yYxGgLFD)
+
+
+## Ejemplo y práctica propuesta:
+
+- [Angular Begins](https://github.com/angularbuilders/angular-begins)
+
+### Gestor de proyectos (CRUD)
+
+```json
+{
+  description: '',
+  budget: 0,
+  dueDate: ''
+}
+```
+
+API: `https://api-base.herokuapp.com/api/pub/projects`
+
