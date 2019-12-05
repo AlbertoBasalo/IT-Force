@@ -47,6 +47,8 @@
 
 ### Gestor de proyectos (CRUD)
 
+> Similar a tareas....
+
 ```json
 {
   description: '',
@@ -57,3 +59,14 @@
 
 API: `https://api-base.herokuapp.com/api/pub/projects`
 
+## Para saber más...
+
+- [angular-university-blog](http://blog.angular-university.io/)
+
+- [angular-in-depth](https://medium.com/angular-in-depth)
+
+- [Dev.to](https://dev.to/)
+
+- [angular-begins](https://github.com/angularbuilders/angular-begins)
+
+- [@albertobasalo](https://twitter.com/albertobasalo)
